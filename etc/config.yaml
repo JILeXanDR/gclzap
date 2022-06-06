@@ -1,0 +1,7 @@
+logging:
+  level: debug
+gcl:
+  serviceAccountPath: ./etc/logging-351506-de9864482d4b.json
+  projectId: projects/logging-351506
+  logId: go-logging-project
+  level: warn
