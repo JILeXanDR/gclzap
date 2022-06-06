@@ -4,6 +4,8 @@ go 1.18
 
 require (
 	cloud.google.com/go/logging v1.4.2
+	github.com/golang/protobuf v1.5.2
+	github.com/google/go-cmp v0.5.5
 	github.com/google/uuid v1.3.0
 	github.com/jonstaryuk/gcloudzap v0.1.1
 	go.uber.org/zap v1.21.0
@@ -14,8 +16,6 @@ require (
 require (
 	cloud.google.com/go v0.81.0 // indirect
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
-	github.com/google/go-cmp v0.5.5 // indirect
 	github.com/googleapis/gax-go/v2 v2.0.5 // indirect
 	github.com/jstemmer/go-junit-report v0.9.1 // indirect
 	go.opencensus.io v0.23.0 // indirect

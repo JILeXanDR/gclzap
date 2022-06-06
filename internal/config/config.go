@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 	"os"
@@ -23,7 +23,7 @@ type GCL struct {
 	Level              zapcore.Level `yaml:"level"`
 }
 
-func loadConfig(path string) (Config, error) {
+func Load(path string) (Config, error) {
 	defer func() {
 		if err := recover(); err != nil {
 

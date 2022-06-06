@@ -3,17 +3,31 @@ package logging
 import (
 	"context"
 	"fmt"
+	"math/rand"
 	"os"
+	"time"
 
 	gcl "cloud.google.com/go/logging"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"google.golang.org/api/option"
+	"logging/pkg/gcloudzap"
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 type Options struct {
 	Level zapcore.Level
 	GCL   GoogleCloudLoggingOptions
+}
+
+type GoogleCloudLoggingOptions struct {
+	CredentialsJSON []byte
+	ProjectID       string
+	LogID           string
+	Level           zapcore.Level
 }
 
 func New(options Options) (*zap.Logger, error) {
@@ -40,7 +54,7 @@ func New(options Options) (*zap.Logger, error) {
 	}
 
 	baseCore := zapcore.NewCore(zapcore.NewJSONEncoder(encoderCfg), os.Stdout, options.Level)
-	gclCore := NewGoogleCloudLoggingZapCore(gclClient, options.GCL.LogID, options.GCL.Level)
+	gclCore := gcloudzap.NewCore(gclClient, options.GCL.LogID, options.GCL.Level)
 	core := zapcore.NewTee(baseCore, gclCore)
 	logger := zap.New(core, zap.AddCaller(), zap.AddStacktrace(zap.ErrorLevel)) // zap.AddCallerSkip(1)
 
